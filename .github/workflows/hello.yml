@@ -12,7 +12,7 @@ on:
         default: 'The Octoversa'
 jobs:
   say_hello:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - run: |
         echo "Hello ${{github.event.inputs.name}}!"
