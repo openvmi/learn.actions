@@ -7,11 +7,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name hello world action step
+      - name: hello world action step
         id: hello
         uses: openvmi/hello-world-docker-action@master
         with:
           who-to-greet: "Mona the octocat"
-      - name Get the output time
+      - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
         
