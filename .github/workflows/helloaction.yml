@@ -1,3 +1,4 @@
+name: HelloWorld action
 on:
   workflow_dispatch
 jobs:
@@ -13,5 +14,10 @@ jobs:
         with:
           who-to-greet: "Mona the octocat"
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        run: |
+          echo "The time was ${{ steps.hello.outputs.time }}"
+          echo "CI: $CI"
+          echo "GITHUB_WORKFLOW: $GITHUB_WORKFLOW"
+          echo "GITHUB_RUN_ID: $GITHUB_RUN_ID"
+          echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
         
