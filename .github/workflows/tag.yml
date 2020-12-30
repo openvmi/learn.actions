@@ -16,10 +16,12 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  addTag:
     # The type of runner that the job will run on
+    name: Add tag automatically
     runs-on: ubuntu-latest
-
+    outputs:
+      tag: ${{ steps.addtag.outputs.tag }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -35,8 +37,13 @@ jobs:
         uses: openvmi/tag-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
+  buildImage:
+    name: Build the docker image
+    runs-on: ubuntu-latest
+    needs: [addTag]
+    steps:
       - name: Build docker image
         id: build
         run: |
-          echo "tag: ${{ steps.addtag.outputs.tag }}"
+          echo "tag: ${{ needs.addTag.outputs.tag }}"
