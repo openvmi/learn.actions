@@ -23,13 +23,20 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: checkout source code
+        uses: actions/checkout@v2
+        id: clonecode
         with:
           fetch-depth: '0'
 
       # Runs a single command using the runners shell
       - name: Bump version and push tag
+        id: addtag
         uses: openvmi/tag-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
+          
+      - name: Build docker image
+        id: build
+        run: |
+          echo "tag: ${{ steps.addtag.tag }}"
