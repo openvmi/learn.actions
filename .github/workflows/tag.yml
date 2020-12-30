@@ -39,4 +39,4 @@ jobs:
       - name: Build docker image
         id: build
         run: |
-          echo "tag: ${{ steps.addtag.output.tag }}"
+          echo "tag: ${{ steps.addtag.outputs.tag }}"
