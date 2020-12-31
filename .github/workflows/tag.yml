@@ -72,4 +72,3 @@ jobs:
           push: true
           tags: |
             ${{ secrets.ALIYUN_REGISTRY}}:latest
-            ${{ secrets.ALIYUN_REGISTRY}}:${${{}}}
