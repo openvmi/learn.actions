@@ -51,7 +51,12 @@ jobs:
           username: ${{ secrets.ALIYUN_USERNAME }}
           password: ${{ secrets.ALIYUN_TOKEN }}
           
-      - name: Build docker image
+      - name: Build and push docker image
         id: build
-        run: |
-          echo "tag: ${{ needs.addTag.outputs.tag }}"
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: registry.cn-hangzhou.aliyuncs.com/vmilabs/test:latest 
