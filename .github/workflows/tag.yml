@@ -54,6 +54,14 @@ jobs:
           username: ${{ secrets.ALIYUN_USERNAME }}
           password: ${{ secrets.ALIYUN_TOKEN }}
           
+      - name: Get image tag
+        id: getTag
+        run: |
+          tag=${{ needs.addTag.outputs.tag }}
+          imageTag=$(tag#*-)
+          echo "imageTag: ${imageTag}"
+          echo ::set-output name=imageTag::${imageTag}
+          
       - name: Build and push docker image
         id: build
         uses: docker/build-push-action@v2
@@ -62,4 +70,6 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ${{ secrets.ALIYUN_REGISTRY}}:latest 
+          tags: |
+            ${{ secrets.ALIYUN_REGISTRY}}:latest
+            ${{ secrets.ALIYUN_REGISTRY}}:${${{}}}
