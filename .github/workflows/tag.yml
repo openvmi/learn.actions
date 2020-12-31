@@ -62,4 +62,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: registry.cn-hangzhou.aliyuncs.com/vmilabs/test:latest 
+          tags: ${{ secrets.ALIYUN_REGISTRY}}:latest 
