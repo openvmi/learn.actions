@@ -58,7 +58,7 @@ jobs:
         id: getTag
         run: |
           tag=${{ needs.addTag.outputs.tag }}
-          imageTag=$(tag#*-)
+          imageTag=${tag#*-}
           echo "imageTag: ${imageTag}"
           echo ::set-output name=imageTag::${imageTag}
           
