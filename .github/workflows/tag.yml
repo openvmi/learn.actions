@@ -72,3 +72,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.ALIYUN_REGISTRY}}:latest
+            ${{ secrets.ALIYUN_REGISTRY}}:${{ steps.getTag.outputs.imageTag }}
